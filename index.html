@@ -123,7 +123,6 @@
     gap: 5rem; align-items:center;
     max-width: 1200px; width:100%;
   }
-  .hero-text { }
   .hero-eyebrow {
     font-family:'Space Mono',monospace; font-size:.75rem;
     color: var(--cyan); letter-spacing:.25em; text-transform:uppercase;
@@ -246,9 +245,7 @@
     display:grid; grid-template-columns:1fr 1fr 1fr;
     gap:.5rem; margin-top:1.5rem; border-top:1px solid var(--glass-border); padding-top:1.5rem;
   }
-  .stat {
-    text-align:center;
-  }
+  .stat { text-align:center; }
   .stat-val {
     font-family:'Orbitron',monospace; font-size:1.2rem; font-weight:700;
     color:var(--cyan);
@@ -270,7 +267,6 @@
     color:rgba(0,245,255,.08); line-height:1; flex-shrink:0;
     -webkit-text-stroke: 1px rgba(0,245,255,.15);
   }
-  .section-title-wrap {}
   .section-sub {
     font-family:'Space Mono',monospace; font-size:.7rem; color:var(--cyan);
     letter-spacing:.2em; text-transform:uppercase; margin-bottom:.4rem;
@@ -455,6 +451,9 @@
     border-radius:10px; padding:1.5rem;
     display:flex; align-items:flex-start; gap:1rem;
     transition:all .3s; backdrop-filter:blur(10px);
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
   }
   .cert-card:hover { border-color:rgba(0,245,255,.25); transform:translateY(-3px); }
   .cert-icon {
@@ -469,6 +468,91 @@
   }
   .cert-info p { font-size:.78rem; color:var(--muted); }
 
+  /* ── PRESENTATIONS ── */
+  .presentation-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.5rem;
+  }
+  .presentation-card {
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    border-radius:14px;
+    padding:1.8rem;
+    backdrop-filter:blur(10px);
+    transition:all .35s cubic-bezier(.23,1,.32,1);
+    position:relative;
+    overflow:hidden;
+  }
+  .presentation-card:hover {
+    transform:translateY(-6px);
+    border-color:rgba(0,245,255,.28);
+    box-shadow:0 18px 50px rgba(0,0,0,.35);
+  }
+  .presentation-card::before {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    transform:scaleX(0);
+    transition:transform .4s ease;
+  }
+  .presentation-card:hover::before {
+    transform:scaleX(1);
+  }
+  .presentation-tag {
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:.68rem;
+    color:var(--cyan);
+    border:1px solid rgba(0,245,255,.18);
+    background:rgba(0,245,255,.07);
+    padding:.3rem .75rem;
+    border-radius:4px;
+    margin-bottom:1rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .presentation-card h3 {
+    font-family:'Orbitron',monospace;
+    font-size:1rem;
+    color:var(--text);
+    margin-bottom:.8rem;
+    line-height:1.4;
+  }
+  .presentation-card p {
+    font-size:.88rem;
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:1rem;
+  }
+  .presentation-links {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.8rem;
+    margin-top:1rem;
+  }
+  .presentation-btn {
+    display:inline-flex;
+    align-items:center;
+    gap:.45rem;
+    padding:.6rem 1rem;
+    border:1px solid var(--glass-border);
+    border-radius:6px;
+    text-decoration:none;
+    color:var(--text);
+    font-size:.75rem;
+    font-family:'Space Mono',monospace;
+    transition:all .25s ease;
+    background:rgba(0,0,0,.2);
+  }
+  .presentation-btn:hover {
+    color:var(--cyan);
+    border-color:var(--cyan);
+    background:rgba(0,245,255,.06);
+  }
+
   /* ── FOOTER ── */
   footer {
     position:relative; z-index:2;
@@ -480,11 +564,6 @@
     letter-spacing:.2em; margin-bottom:.5rem;
   }
   .footer-text { font-size:.8rem; color:var(--muted); }
-
-  /* ── DATA VIZ DECORATION ── */
-  .deco-chart {
-    position:absolute; opacity:.07; pointer-events:none;
-  }
 
   /* ── SCROLL PROGRESS ── */
   #progress-bar {
@@ -509,13 +588,90 @@
 
   @media(max-width:900px) {
     nav { padding:1rem 2rem; }
-    .nav-links { gap:1.5rem; }
+    .nav-links { gap:1.2rem; flex-wrap:wrap; justify-content:flex-end; }
     #hero { padding:7rem 2rem 4rem; }
     .hero-inner { grid-template-columns:1fr; gap:3rem; }
     .hero-card { order:-1; }
     section { padding:4rem 2rem; }
     .edu-grid { grid-template-columns:1fr; }
     .projects-grid { grid-template-columns:1fr; }
+  }
+
+  @media(max-width:640px) {
+    body { cursor:auto; }
+    #cursor, #cursor-ring, #cursor-trail { display:none; }
+    nav {
+      padding: 1rem 1rem;
+      flex-direction: column;
+      gap: .8rem;
+    }
+    .nav-logo { font-size: 1rem; }
+    .nav-links {
+      gap: .9rem;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: .65rem;
+    }
+    .hero-inner {
+      padding: 8rem 1.2rem 2rem !important;
+    }
+    .hero-name {
+      font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+    .hero-title {
+      font-size: .95rem;
+      max-width: 100%;
+    }
+    .hero-badges {
+      gap: .45rem;
+    }
+    .badge {
+      font-size: .58rem;
+      padding: .3rem .65rem;
+    }
+    .hero-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+    .profile-card-3d {
+      padding: 1.6rem;
+    }
+    .profile-img-wrap {
+      width: 130px;
+      height: 130px;
+    }
+    .profile-img-wrap img {
+      width: 124px;
+      height: 124px;
+    }
+    .card-links {
+      flex-direction: column;
+    }
+    .card-link {
+      justify-content: center;
+    }
+    .card-stats {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .7rem;
+      margin-bottom: 2.2rem;
+    }
+    .section-num {
+      font-size: 2.8rem;
+    }
+    .divider {
+      margin: 0 1rem;
+      width: calc(100% - 2rem);
+    }
   }
 </style>
 </head>
@@ -542,6 +698,7 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certs">Certs</a></li>
+    <li><a href="#presentations">Presentations</a></li>
   </ul>
 </nav>
 
@@ -574,7 +731,7 @@
       <div class="hero-card" id="heroCard">
         <div class="profile-card-3d" id="profileCard3d">
           <div class="profile-img-wrap">
-            <img src="https://media.licdn.com/dms/image/v2/D5635AQHDo3Rz6W3_eQ/profile-framedphoto-shrink_400_400/B56ZlIv.KrHUAg-/0/1757862159349?e=1758556800&v=beta&t=fp2idFuy33VhC0OsUXZGHiTdBq7ro7mfx-aGnzHK9tY" alt="Reecha">
+            <img id="profilePhoto" src="YOUR_PUBLIC_PROFILE_IMAGE_LINK_HERE" alt="Reecha">
           </div>
           <div class="card-name">REECHA</div>
           <div class="card-role">Data Analyst · Designer · Developer</div>
@@ -813,34 +970,114 @@
     </div>
 
     <div class="certs-grid">
-      <div class="cert-card">
+      <a class="cert-card" href="certificates/aws-cloud-essentials.pdf" target="_blank">
         <div class="cert-icon">☁️</div>
         <div class="cert-info">
           <h4>AWS Cloud Essentials</h4>
           <p>Amazon Web Services</p>
         </div>
-      </div>
-      <div class="cert-card">
+      </a>
+
+      <a class="cert-card" href="certificates/powerbi-beginners.pdf" target="_blank">
         <div class="cert-icon">📊</div>
         <div class="cert-info">
           <h4>Power BI for Beginners</h4>
           <p>Simplilearn · 2025</p>
         </div>
-      </div>
-      <div class="cert-card">
+      </a>
+
+      <a class="cert-card" href="certificates/deloitte-data-analytics.pdf" target="_blank">
         <div class="cert-icon">🔷</div>
         <div class="cert-info">
           <h4>Deloitte Australia Data Analytics</h4>
           <p>Job Simulation · Forage · May 2025</p>
         </div>
-      </div>
-      <div class="cert-card">
+      </a>
+
+      <a class="cert-card" href="certificates/sql-database-management.pdf" target="_blank">
         <div class="cert-icon">🗄️</div>
         <div class="cert-info">
           <h4>SQL Database Management</h4>
           <p>Certification · Dec 2024</p>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── PRESENTATIONS ── -->
+  <section id="presentations">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title-wrap">
+        <div class="section-sub">Academic & Technical Speaking</div>
+        <h2 class="section-title">Presentations</h2>
       </div>
+    </div>
+
+    <div class="presentation-grid">
+
+      <div class="presentation-card">
+        <div class="presentation-tag">Technical</div>
+        <h3>Salesforce – World’s No.1 CRM</h3>
+        <p>
+          Presented to department faculty and peers, explaining core CRM concepts,
+          business applications, customer workflows, and Salesforce’s importance in modern industry.
+        </p>
+        <div class="presentation-links">
+          <a href="presentations/salesforce-crm.pdf" target="_blank" class="presentation-btn">View PPT/PDF</a>
+        </div>
+      </div>
+
+      <div class="presentation-card">
+        <div class="presentation-tag">Academic</div>
+        <h3>Graph and Its Theory (2024)</h3>
+        <p>
+          Delivered before the Head of the Mathematics Department, JSS University.
+          Covered graph fundamentals, graph properties, and practical real-world applications.
+        </p>
+        <div class="presentation-links">
+          <a href="presentations/graph-theory-2024.pdf" target="_blank" class="presentation-btn">View PPT/PDF</a>
+        </div>
+      </div>
+
+      <div class="presentation-card">
+        <div class="presentation-tag">Programming</div>
+        <h3>Dictionaries in Python</h3>
+        <p>
+          Presented Python dictionaries with focus on data structures,
+          key-value mapping, operations, nested usage, and programming applications.
+        </p>
+        <div class="presentation-links">
+          <a href="presentations/dictionaries-python.pdf" target="_blank" class="presentation-btn">View PPT/PDF</a>
+        </div>
+      </div>
+
+      <div class="presentation-card">
+        <div class="presentation-tag">Business Case</div>
+        <h3>Zomato – Entrepreneurial Growth & Market Leadership</h3>
+        <p>
+          Presented how Zomato as an entrepreneur-led company built market relevance through innovation,
+          digital strategy, user convenience, and strong brand positioning.
+        </p>
+        <div class="presentation-links">
+          <a href="presentations/zomato-presentation.pdf" target="_blank" class="presentation-btn">View PPT/PDF</a>
+        </div>
+      </div>
+
+      <div class="presentation-card">
+        <div class="presentation-tag">Conference</div>
+        <h3>Exploring Cloud Computing</h3>
+        <p>
+          Presented at the National Conference on Social Impact of Digitization (NCSID-2022),
+          discussing cloud fundamentals, scalability, accessibility, and digital transformation.
+        </p>
+        <div class="presentation-links">
+          <a href="presentations/exploring-cloud-computing-ncsid-2022.pdf" target="_blank" class="presentation-btn">View Conference Presentation</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -852,6 +1089,13 @@
 </footer>
 
 <script>
+// ── LinkedIn / Public Profile Image Setup ──
+// IMPORTANT:
+// Direct LinkedIn image URLs often expire.
+// Best method: use a permanent public image link here.
+const linkedInProfilePhoto = "YOUR_PUBLIC_PROFILE_IMAGE_LINK_HERE";
+document.getElementById("profilePhoto").src = linkedInProfilePhoto;
+
 // ── Cursor ──
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
@@ -860,26 +1104,34 @@ let mx=0,my=0,rx=0,ry=0,tx=0,ty=0;
 
 document.addEventListener('mousemove',e=>{
   mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  if(cursor){
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  }
 });
 
 function animCursor(){
-  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  tx+=(mx-tx)*.05; ty+=(my-ty)*.05;
-  trail.style.left=tx+'px'; trail.style.top=ty+'px';
-  requestAnimationFrame(animCursor);
+  if(ring && trail){
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    tx+=(mx-tx)*.05; ty+=(my-ty)*.05;
+    trail.style.left=tx+'px'; trail.style.top=ty+'px';
+    requestAnimationFrame(animCursor);
+  }
 }
 animCursor();
 
-document.querySelectorAll('a,button,.edu-card,.proj-card,.exp-card').forEach(el=>{
+document.querySelectorAll('a,button,.edu-card,.proj-card,.exp-card,.cert-card,.presentation-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{
-    cursor.style.width='22px'; cursor.style.height='22px';
-    ring.style.width='60px'; ring.style.height='60px';
+    if(cursor && ring){
+      cursor.style.width='22px'; cursor.style.height='22px';
+      ring.style.width='60px'; ring.style.height='60px';
+    }
   });
   el.addEventListener('mouseleave',()=>{
-    cursor.style.width='14px'; cursor.style.height='14px';
-    ring.style.width='44px'; ring.style.height='44px';
+    if(cursor && ring){
+      cursor.style.width='14px'; cursor.style.height='14px';
+      ring.style.width='44px'; ring.style.height='44px';
+    }
   });
 });
 
@@ -913,9 +1165,8 @@ window.addEventListener('mousemove',e=>{ mouseX=e.clientX; mouseY=e.clientY; });
 
 function drawBg(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  const t=Date.now()*.001;
 
-  // Draw grid lines
+  // Grid
   ctx.strokeStyle='rgba(0,245,255,0.025)';
   ctx.lineWidth=1;
   const gridSize=80;
@@ -926,7 +1177,7 @@ function drawBg(){
     ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();
   }
 
-  // Draw bar chart decoration in bottom-right
+  // Bar chart deco
   ctx.save();
   ctx.globalAlpha=0.04;
   const bars=[0.3,0.7,0.5,0.9,0.4,0.6,0.8,0.35,0.65];
@@ -1027,10 +1278,10 @@ const observer = new IntersectionObserver(entries=>{
   });
 },{threshold:.1});
 
-document.querySelectorAll('.edu-card,.exp-card,.proj-card,.cert-card').forEach((el,i)=>{
+document.querySelectorAll('.edu-card,.exp-card,.proj-card,.cert-card,.presentation-card').forEach((el,i)=>{
   el.style.opacity='0';
   el.style.transform='translateY(30px)';
-  el.style.transition=`opacity .6s ease ${i*.1}s, transform .6s cubic-bezier(.23,1,.32,1) ${i*.1}s`;
+  el.style.transition=`opacity .6s ease ${i*.08}s, transform .6s cubic-bezier(.23,1,.32,1) ${i*.08}s`;
   observer.observe(el);
 });
 </script>
